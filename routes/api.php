@@ -26,3 +26,6 @@ Route::post('/tugas/lingkaran/keliling', [App\Http\Controllers\Api\Tugas\Kelilin
 // API untuk menghitung kubus
 Route::post('/tugas/kubus/volume', [App\Http\Controllers\Api\Tugas\VolumeKubusController::class, 'hitungVolume']);
 Route::post('/tugas/kubus/luas-permukaan', [App\Http\Controllers\Api\Tugas\LuasPermukaanKubusController::class, 'hitungLuasPermukaan']);
+
+// API routes untuk FormController
+Route::apiResource('/forms', App\Http\Controllers\Api\Form\FormController::class);
