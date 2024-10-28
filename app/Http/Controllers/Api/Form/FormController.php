@@ -1,4 +1,5 @@
 <?php 
+
 namespace App\Http\Controllers\Api\Form;
 
 use App\Http\Controllers\Controller;
@@ -7,13 +8,11 @@ use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
-    // Get all forms (index method)
     public function index()
     {
         return response()->json(Form::all(), 200);
     }
 
-    // Get a single form by ID (show method)
     public function show($id)
     {
         $form = Form::find($id);
@@ -23,33 +22,27 @@ class FormController extends Controller
         return response()->json($form, 200);
     }
 
-    // Create a new form (store method)
     public function store(Request $request)
     {
-        // Validasi input dari form termasuk tertarik_jurusan dan domisili
+        // Validasi untuk atribut baru
         $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'whatsapp' => 'required|string|max:20',
-            'email' => 'required|email',
-            'tertarik_jurusan' => 'required|string',
+            'nama' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string|max:10',
             'alamat' => 'required|string|max:255',
-            'pesan' => 'nullable|string',
+            'program_studi' => 'required|string|max:255',
+            'email' => 'required|email',
+            'no_telp' => 'nullable|string|max:20',
+            'nama_orang_tua' => 'required|string|max:255',
         ]);
 
         // Membuat form baru dengan data yang divalidasi
-        $form = Form::create([
-            'nama_lengkap' => $validatedData['nama_lengkap'],
-            'whatsapp' => $validatedData['whatsapp'],
-            'email' => $validatedData['email'],
-            'tertarik_jurusan' => $validatedData['tertarik_jurusan'],
-            'alamat' => $validatedData['alamat'],
-            'pesan' => $validatedData['pesan'] ?? '',
-        ]);
+        $form = Form::create($validatedData);
 
         return response()->json($form, 201);
     }
 
-    // Update an existing form (update method)
     public function update(Request $request, $id)
     {
         $form = Form::find($id);
@@ -57,23 +50,23 @@ class FormController extends Controller
             return response()->json(['message' => 'Form tidak ditemukan'], 404);
         }
 
-        // Validasi input yang akan diupdate
         $validatedData = $request->validate([
-            'nama_lengkap' => 'string|max:255',
-            'whatsapp' => 'string|max:20',
-            'email' => 'email',
-            'tertarik_jurusan' => 'string',
+            'nama' => 'string|max:255',
+            'tempat_lahir' => 'string|max:255',
+            'tanggal_lahir' => 'date',
+            'jenis_kelamin' => 'string|max:10',
             'alamat' => 'string|max:255',
-            'pesan' => 'string',
+            'program_studi' => 'string|max:255',
+            'email' => 'email',
+            'no_telp' => 'string|max:20',
+            'nama_orang_tua' => 'string|max:255',
         ]);
 
-        // Update form dengan data baru
         $form->update($validatedData);
 
         return response()->json($form, 200);
     }
-
-    // Delete a form (destroy method)
+    
     public function destroy($id)
     {
         $form = Form::find($id);

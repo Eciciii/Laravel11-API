@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lengkap');
-            $table->string('whatsapp');
-            $table->string('email');
-            $table->string('tertarik_jurusan');
-            $table->string('alamat');
-            $table->text('pesan')->nullable();
+            $table->string('nama'); // Nama lengkap
+            $table->string('tempat_lahir'); // Tempat lahir
+            $table->date('tanggal_lahir'); // Tanggal lahir
+            $table->string('jenis_kelamin'); // Jenis kelamin
+            $table->string('alamat'); // Alamat
+            $table->string('program_studi'); // Program studi
+            $table->string('email'); // Email
+            $table->string('no_telp'); // Nomor telepon
+            $table->string('nama_orang_tua'); // Nama orang tua
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.

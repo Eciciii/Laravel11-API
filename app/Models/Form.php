@@ -11,11 +11,14 @@ class Form extends Model
 
     // Menambahkan field yang dapat diisi
     protected $fillable = [
-        'nama_lengkap',
-        'whatsapp',
-        'email', 
-        'tertarik_jurusan',
+        'nama',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jenis_kelamin',
         'alamat',
-        'pesan'
+        'program_studi',
+        'email',
+        'no_telp',
+        'nama_orang_tua'
     ];
 }
